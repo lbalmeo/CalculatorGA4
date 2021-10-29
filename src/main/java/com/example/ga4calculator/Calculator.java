@@ -31,6 +31,7 @@ public class Calculator extends Application {
     String i1;
     String i2;
     String op;
+    static final String LOG_10 = "log10";
 
     public static void main(String[] args) {
         launch(args);
@@ -59,7 +60,7 @@ public class Calculator extends Application {
         buttsub = makeButton("-");
         buttmult = makeButton("*");
         buttdiv = makeButton("/");
-        buttlog = makeButton("log10");
+        buttlog = makeButton(LOG_10);
         butteq = makeEqButton("=");
 
         root.getChildren().addAll(label1,butt0,butt1,butt2,butt3,butt4,butt5,butt6,butt7,butt8,butt9,buttadd,buttsub,buttmult,buttdiv,buttlog,butteq);
@@ -71,13 +72,13 @@ public class Calculator extends Application {
         butt.setOnAction(new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent event) {
-                if(str.compareTo("+") == 0 || str.compareTo("-") == 0 || str.compareTo("*") == 0 || str.compareTo("/") == 0 || str.compareTo("log10") == 0){
+                if(str.compareTo("+") == 0 || str.compareTo("-") == 0 || str.compareTo("*") == 0 || str.compareTo("/") == 0 || str.compareTo(LOG_10) == 0){
                     op = str;
                 }
-                else if(op.compareTo("log10") == 0 || op.compareTo("") == 0) i1 += str;
+                else if(op.compareTo(LOG_10) == 0 || op.compareTo("") == 0) i1 += str;
                 else i2 += str;
 
-                if(op.compareTo("log10") != 0) label1.setText(i1 + " " + op + " " + i2);
+                if(op.compareTo(LOG_10) != 0) label1.setText(i1 + " " + op + " " + i2);
                 else label1.setText("log10(" + i1 + ")");
             }
         });
@@ -89,14 +90,14 @@ public class Calculator extends Application {
         butt.setOnAction(new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent event) {
-                if(op.compareTo("log10") != 0 && (i1.compareTo("") == 0 || i2.compareTo("") == 0 || op.compareTo("") == 0)){
+                if(op.compareTo(LOG_10) != 0 && (i1.compareTo("") == 0 || i2.compareTo("") == 0 || op.compareTo("") == 0)){
                     label1.setText("Invalid equation. Please try again.");
                     return;
                 }
 
                 float y = 1;
                 float x = Integer.parseInt(i1);
-                if(op.compareTo("log10") != 0) y = Integer.parseInt(i2);
+                if(op.compareTo(LOG_10) != 0) y = Integer.parseInt(i2);
 
                 if(op.compareTo("+") == 0) label1.setText(i1 + " " + op + " " + i2 + " = " + (x + y));
                 else if(op.compareTo("-") == 0) label1.setText(i1 + " " + op + " " + i2 + " = " + (x - y));
